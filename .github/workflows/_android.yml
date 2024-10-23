@@ -54,7 +54,8 @@ jobs:
   build-llm-demo:
     name: build-llm-demo
     uses: pytorch/test-infra/.github/workflows/linux_job.yml@main
-    if: ${{ steps.check_path.outputs.should_run }} == '1'
+    needs: check_path
+    if: ${{ needs.check_path.outputs.should_run }} == '1'
     with:
       runner: linux.2xlarge
       docker-image: executorch-ubuntu-22.04-clang12-android
